@@ -12,7 +12,7 @@ class TestTextNode(unittest.TestCase):
     def test_repr(self):
         node = TextNode("This is a text node", "bold", "https://www.test.com")
         expected = "TextNode(This is a text node, bold, https://www.test.com)"
-        self.assertEqual(node.__repr__(), expected)
+        self.assertEqual(repr(node), expected)
 
 
 if __name__ == "__main__":

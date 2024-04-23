@@ -28,7 +28,7 @@ class LeafNode(HTMLNode):
         output = self.value
         props = ""
         if self.props:
-            props = repr(self.props)
+            props = self.props_to_html()
         if self.tag:
             output = f"<{self.tag}{props}>{output}</{self.tag}>"
         return output

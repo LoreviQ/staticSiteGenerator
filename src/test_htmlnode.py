@@ -1,13 +1,11 @@
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
-class TestHTMOLNode(unittest.TestCase):
+class TestHTMLNode(unittest.TestCase):
     def test_props_to_html(self):
-        node = node = HTMLNode(
-            props={"href": "https://www.google.com", "target": "_blank"}
-        )
+        node = HTMLNode(props={"href": "https://www.google.com", "target": "_blank"})
         expected = ' href="https://www.google.com" target="_blank"'
         self.assertEqual(node.props_to_html(), expected)
 
@@ -17,6 +15,11 @@ class TestHTMOLNode(unittest.TestCase):
         )
         expected = "HTMLNode(a, test, None, {'href': 'https://www.google.com', 'target': '_blank'})"
         self.assertEqual(repr(node), expected)
+
+    def test_to_html(self):
+        node = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
+        expected = '<a href="https://www.google.com">Click me!</a>'
+        self.assertEqual(node.to_html(), expected)
 
 
 if __name__ == "__main__":

@@ -10,8 +10,9 @@ class HTMLNode:
 
     def props_to_html(self):
         output_string = ""
-        for k, v in self.props.items():
-            output_string += f' {k}="{v}"'
+        if self.props:
+            for k, v in self.props.items():
+                output_string += f' {k}="{v}"'
         return output_string
 
     def __repr__(self):
@@ -26,9 +27,6 @@ class LeafNode(HTMLNode):
         if self.value is None:
             raise ValueError("LeafNodes require a value")
         output = self.value
-        props = ""
-        if self.props:
-            props = self.props_to_html()
         if self.tag:
-            output = f"<{self.tag}{props}>{output}</{self.tag}>"
+            output = f"<{self.tag}{self.props_to_html()}>{output}</{self.tag}>"
         return output

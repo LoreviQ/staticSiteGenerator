@@ -21,6 +21,11 @@ class TestHTMLNode(unittest.TestCase):
         expected = '<a href="https://www.google.com">Click me!</a>'
         self.assertEqual(node.to_html(), expected)
 
+    def test_to_html_empty_props(self):
+        node = LeafNode("a", "Click me!")
+        expected = "<a>Click me!</a>"
+        self.assertEqual(node.to_html(), expected)
+
 
 if __name__ == "__main__":
     unittest.main()

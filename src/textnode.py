@@ -1,3 +1,6 @@
+from htmlnode import HTMLNode, LeafNode, ParentNode
+
+
 class TextNode:
     def __init__(self, text, text_type, url=None):
         self.text = text
@@ -13,3 +16,7 @@ class TextNode:
 
     def __repr__(self):
         return f"TextNode({self.text}, {self.text_type}, {self.url})"
+
+    def to_html_node(self):
+        if self.text_type == "text":
+            return LeafNode(None, self.text)

@@ -23,5 +23,7 @@ class TextNode:
                 return LeafNode(None, self.text)
             case "bold":
                 return LeafNode("b", self.text)
-
-        raise ValueError(f"Incompatible Text Type: {self.text_type}")
+            case "italic":
+                return LeafNode("i", self.text)
+            case _:
+                raise ValueError(f"Incompatible Text Type: {self.text_type}")

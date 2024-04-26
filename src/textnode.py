@@ -20,3 +20,6 @@ class TextNode:
     def to_html_node(self):
         if self.text_type == "text":
             return LeafNode(None, self.text)
+        if self.text_type == "bold":
+            return LeafNode("b", self.text)
+        raise ValueError(f"Incompatible Text Type: {self.text_type}")

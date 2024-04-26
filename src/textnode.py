@@ -29,5 +29,7 @@ class TextNode:
                 return LeafNode("code", self.text)
             case "link":
                 return LeafNode("a", self.text, {"href": self.url})
+            case "image":
+                return LeafNode("img", "", {"src": self.url, "alt": self.text})
             case _:
                 raise ValueError(f"Incompatible Text Type: {self.text_type}")

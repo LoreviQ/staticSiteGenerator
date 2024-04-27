@@ -1,18 +1,24 @@
 import unittest
 
+import htmlnode
 import textnode
 
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
         node = textnode.TextNode("This is a text node", "bold")
-        node2 = textnode.TextNode("This is a text node", "bold")
-        self.assertEqual(node, node2)
+        expected = textnode.TextNode("This is a text node", "bold")
+        self.assertEqual(node, expected)
 
     def test_repr(self):
         node = textnode.TextNode("This is a text node", "bold", "https://www.test.com")
         expected = "TextNode(This is a text node, bold, https://www.test.com)"
         self.assertEqual(repr(node), expected)
+
+    def test_conversion(self):
+        node = textnode.TextNode("This is a text node", "bold")
+        expected = htmlnode.LeafNode("b", "This is a text node")
+        self.assertEqual(node.to_html_node(), expected)
 
     def test_split_bold(self):
         node = [textnode.TextNode("This is a node with **bold** text", "text")]

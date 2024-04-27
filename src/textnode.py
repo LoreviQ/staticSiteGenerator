@@ -48,6 +48,8 @@ def split_TextNode(text_nodes, text_type):
             split_text = text_node.text.split(delimiter)
             mode = False
             for text in split_text:
+                if text == "":
+                    continue
                 if mode:
                     output += [TextNode(text, text_type)]
                 else:

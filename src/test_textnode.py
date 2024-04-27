@@ -20,6 +20,13 @@ class TestTextNode(unittest.TestCase):
         expected = htmlnode.LeafNode("b", "This is a text node")
         self.assertEqual(node.to_html_node(), expected)
 
+    def test_conversion_image(self):
+        node = textnode.TextNode("This is an image", "image", "https://www.test.com")
+        expected = htmlnode.LeafNode(
+            "img", "", {"src": "https://www.test.com", "alt": "This is an image"}
+        )
+        self.assertEqual(node.to_html_node(), expected)
+
     def test_split_bold(self):
         node = [textnode.TextNode("This is a node with **bold** text", "text")]
         expected = [

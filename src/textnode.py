@@ -33,3 +33,24 @@ class TextNode:
                 return LeafNode("img", "", {"src": self.url, "alt": self.text})
             case _:
                 raise ValueError(f"Incompatible Text Type: {self.text_type}")
+
+
+def split_TextNode(textNodes, type):
+    delimiter = {"bold": "**", "italic": "*", "code": "`"}[type]
+    output = []
+    for textNode in textNodes:
+        num_delimiters = textNode.text.count(delimiter)
+        if num_delimiters == 0:
+            output += [textNode]
+        elif num_delimiters % 2 == 1:
+            raise ValueError("Invalid markdown, formatted section not closed")
+        else:
+            split_text = textNode.text.split(delimiter)
+            mode = False
+            for text in split_text:
+                if mode:
+                    output += [TextNode(text, type)]
+                else:
+                    output += [TextNode(text, "text")]
+                mode = not mode
+    return output

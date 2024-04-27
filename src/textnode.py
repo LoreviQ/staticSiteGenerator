@@ -35,17 +35,17 @@ class TextNode:
                 raise ValueError(f"Incompatible Text Type: {self.text_type}")
 
 
-def split_TextNode(textNodes, text_type):
+def split_TextNode(text_nodes, text_type):
     delimiter = {"bold": "**", "italic": "*", "code": "`"}[text_type]
     output = []
-    for textNode in textNodes:
-        num_delimiters = textNode.text.count(delimiter)
+    for text_node in text_nodes:
+        num_delimiters = text_node.text.count(delimiter)
         if num_delimiters == 0:
-            output += [textNode]
+            output += [text_node]
         elif num_delimiters % 2 == 1:
             raise ValueError("Invalid markdown, formatted section not closed")
         else:
-            split_text = textNode.text.split(delimiter)
+            split_text = text_node.text.split(delimiter)
             mode = False
             for text in split_text:
                 if mode:

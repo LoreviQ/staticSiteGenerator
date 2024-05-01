@@ -34,7 +34,7 @@ class TestTextNode(unittest.TestCase):
             textnode.TextNode("bold", "bold"),
             textnode.TextNode(" text", "text"),
         ]
-        self.assertEqual(textnode.split_TextNode(node, "bold"), expected)
+        self.assertEqual(textnode.split_textNode_delimiter(node, "bold"), expected)
 
     def test_split_all(self):
         node = [
@@ -51,9 +51,9 @@ class TestTextNode(unittest.TestCase):
             textnode.TextNode(" text and ", "text"),
             textnode.TextNode("a code block", "code"),
         ]
-        node = textnode.split_TextNode(node, "bold")
-        node = textnode.split_TextNode(node, "italic")
-        node = textnode.split_TextNode(node, "code")
+        node = textnode.split_textNode_delimiter(node, "bold")
+        node = textnode.split_textNode_delimiter(node, "italic")
+        node = textnode.split_textNode_delimiter(node, "code")
         self.assertEqual(node, expected)
 
 

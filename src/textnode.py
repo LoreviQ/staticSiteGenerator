@@ -35,7 +35,7 @@ class TextNode:
                 raise ValueError(f"Incompatible Text Type: {self.text_type}")
 
 
-def split_TextNode(text_nodes, text_type):
+def split_textNode_delimiter(text_nodes, text_type):
     delimiter = {"bold": "**", "italic": "*", "code": "`"}[text_type]
     output = []
     for text_node in text_nodes:

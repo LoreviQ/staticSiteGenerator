@@ -77,3 +77,22 @@ def textNode_extract_markdown_images(text_nodes):
         if text:
             output += [TextNode(text, "text")]
     return output
+
+
+def textNode_extract_markdown_links(text_nodes):
+    output = []
+    for text_node in text_nodes:
+        text = text_node.text
+        matches = re.findall(r"(?:[^!])\[(.*?)\]\((.*?)\)", text)
+        if not matches:
+            output += [text_node]
+            continue
+        for match in matches:
+            split_text = text.split(f"[{match[0]}]({match[1]})")
+            if split_text[0]:
+                output += [TextNode(split_text[0], "text")]
+            output += [TextNode(match[0], "link", match[1])]
+            text = split_text[1]
+        if text:
+            output += [TextNode(text, "text")]
+    return output

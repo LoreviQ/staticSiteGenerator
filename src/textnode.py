@@ -65,7 +65,6 @@ def textNode_extract_markdown_images(text_nodes):
     for text_node in text_nodes:
         text = text_node.text
         matches = re.findall(r"!\[(.*?)\]\((.*?)\)", text)
-        print(matches)
         if not matches:
             output += [text_node]
             continue

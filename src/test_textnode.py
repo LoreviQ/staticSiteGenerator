@@ -104,6 +104,31 @@ class TestTextNode(unittest.TestCase):
         node = textnode.textNode_extract_markdown_links(node)
         self.assertEqual(node, expected)
 
+    def test_extract_mixed(self):
+        node = [
+            textnode.TextNode(
+                "This is text with a [link](https://www.example.com) and an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png)",
+                "text",
+            )
+        ]
+        expected = [
+            textnode.TextNode("This is text with a ", "text"),
+            textnode.TextNode(
+                "link",
+                "link",
+                "https://www.example.com",
+            ),
+            textnode.TextNode(" and an ", "text"),
+            textnode.TextNode(
+                "image",
+                "image",
+                "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png",
+            ),
+        ]
+        node = textnode.textNode_extract_markdown_links(node)
+        node = textnode.textNode_extract_markdown_images(node)
+        self.assertEqual(node, expected)
+
 
 if __name__ == "__main__":
     unittest.main()

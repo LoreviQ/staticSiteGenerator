@@ -69,7 +69,7 @@ def textNode_extract_markdown_images(text_nodes):
             output += [text_node]
             continue
         for match in matches:
-            split_text = text.split(f"![{match[0]}]({match[1]})")
+            split_text = text.split(f"![{match[0]}]({match[1]})", maxsplits=1)
             if split_text[0]:
                 output += [TextNode(split_text[0], "text")]
             output += [TextNode(match[0], "image", match[1])]
@@ -88,7 +88,7 @@ def textNode_extract_markdown_links(text_nodes):
             output += [text_node]
             continue
         for match in matches:
-            split_text = text.split(f"[{match[0]}]({match[1]})")
+            split_text = text.split(f"[{match[0]}]({match[1]})", maxsplits=1)
             if split_text[0]:
                 output += [TextNode(split_text[0], "text")]
             output += [TextNode(match[0], "link", match[1])]

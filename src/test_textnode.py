@@ -56,6 +56,30 @@ class TestTextNode(unittest.TestCase):
         node = textnode.split_textNode_delimiter(node, "code")
         self.assertEqual(node, expected)
 
+    def test_extract_images(self):
+        node = [
+            textnode.TextNode(
+                "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and ![another](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png)",
+                "text",
+            )
+        ]
+        expected = [
+            textnode.TextNode("This is text with an ", "text"),
+            textnode.TextNode(
+                "image",
+                "image",
+                "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png",
+            ),
+            textnode.TextNode(" and ", "text"),
+            textnode.TextNode(
+                "another",
+                "image",
+                "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png",
+            ),
+        ]
+        node = textnode.textNode_extract_markdown_images(node)
+        self.assertEqual(node, expected)
+
 
 if __name__ == "__main__":
     unittest.main()

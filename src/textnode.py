@@ -73,7 +73,7 @@ def textNode_extract_markdown_images(text_nodes):
             split_match = match.split("](")
             if split_text[0]:
                 output += [TextNode(split_text[0], "text")]
-            output += [TextNode(split_match[0][2:], "text", split_match[1][:-1])]
+            output += [TextNode(split_match[0][2:], "image", split_match[1][:-1])]
             if split_text[1]:
                 output += [TextNode(split_text[1], "text")]
                 text = split_text[1]

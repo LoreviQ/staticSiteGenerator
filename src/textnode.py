@@ -1,3 +1,5 @@
+import re
+
 from htmlnode import LeafNode
 
 
@@ -55,4 +57,24 @@ def split_textNode_delimiter(text_nodes, text_type):
                 else:
                     output += [TextNode(text, "text")]
                 mode = not mode
+    return output
+
+
+def textNode_extract_markdown_images(text_nodes):
+    output = []
+    for text_node in text_nodes:
+        text = text_node.text
+        matches = re.findall(r"!\[(.*?)\]\((.*?)\)", text)
+        if not matches:
+            output += [text_node]
+            continue
+        for match in matches:
+            split_text = text.split(match)
+            split_match = match.split("](")
+            if split_text[0]:
+                output += [TextNode(split_text[0], "text")]
+            output += [TextNode(split_match[0][2:], "text", split_match[1][:-1])]
+            if split_text[1]:
+                output += [TextNode(split_text[1], "text")]
+                text = split_text[1]
     return output

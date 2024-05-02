@@ -80,6 +80,30 @@ class TestTextNode(unittest.TestCase):
         node = textnode.textNode_extract_markdown_images(node)
         self.assertEqual(node, expected)
 
+    def test_extract_links(self):
+        node = [
+            textnode.TextNode(
+                "This is text with a [link](https://www.example.com) and [another](https://www.example.com/another)",
+                "text",
+            )
+        ]
+        expected = [
+            textnode.TextNode("This is text with a ", "text"),
+            textnode.TextNode(
+                "link",
+                "link",
+                "https://www.example.com",
+            ),
+            textnode.TextNode(" and ", "text"),
+            textnode.TextNode(
+                "another",
+                "link",
+                "https://www.example.com/another",
+            ),
+        ]
+        node = textnode.textNode_extract_markdown_links(node)
+        self.assertEqual(node, expected)
+
 
 if __name__ == "__main__":
     unittest.main()

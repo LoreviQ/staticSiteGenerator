@@ -106,3 +106,14 @@ def text_to_textnode_markdown(text):
     node = split_textNode_delimiter(node, "italic")
     node = split_textNode_delimiter(node, "code")
     return node
+
+
+def markdown_to_blocks(text):
+    blocks = text.split("\n\n")
+    output = []
+    for block in blocks:
+        if block == "":
+            continue
+        block = block.strip()
+        output += [block]
+    return output

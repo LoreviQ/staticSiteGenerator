@@ -129,6 +129,26 @@ class TestTextNode(unittest.TestCase):
         node = textnode.textNode_extract_markdown_images(node)
         self.assertEqual(node, expected)
 
+    def test_total_conversion(self):
+        text = "This is **text** with an *italic* word and a `code block` and an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
+        expected = [
+            textnode.TextNode("This is ", "text"),
+            textnode.TextNode("text", "bold"),
+            textnode.TextNode(" with an ", "text"),
+            textnode.TextNode("italic", "italic"),
+            textnode.TextNode(" word and a ", "text"),
+            textnode.TextNode("code block", "code"),
+            textnode.TextNode(" and an ", "text"),
+            textnode.TextNode(
+                "image",
+                "image",
+                "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png",
+            ),
+            textnode.TextNode(" and a ", "text"),
+            textnode.TextNode("link", "link", "https://boot.dev"),
+        ]
+        self.assertEqual(textnode.text_to_textnode(text), expected)
+
 
 if __name__ == "__main__":
     unittest.main()

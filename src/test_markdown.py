@@ -128,13 +128,43 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(markdown.text_to_textnode_markdown(text), expected)
 
     def test_blocks(self):
-        text = """This is **bolded** paragraph\n\nThis is another paragraph with *italic* text and `code` here\nThis is the same paragraph on a new line\n\n* This is a list\n* with items"""
+        text = "This is **bolded** paragraph\n\nThis is another paragraph with *italic* text and `code` here\nThis is the same paragraph on a new line\n\n* This is a list\n* with items"
         expected = [
             "This is **bolded** paragraph",
             "This is another paragraph with *italic* text and `code` here\nThis is the same paragraph on a new line",
             "* This is a list\n* with items",
         ]
         self.assertEqual(markdown.markdown_to_blocks(text), expected)
+
+    def test_blocktype_heading(self):
+        text = "### Heading"
+        expected = "heading"
+        self.assertEqual(markdown.block_to_blocktype(text), expected)
+
+    def test_blocktype_code(self):
+        text = "```Code```"
+        expected = "code"
+        self.assertEqual(markdown.block_to_blocktype(text), expected)
+
+    def test_blocktype_quote(self):
+        text = ">Quote L1\n> Quote L2"
+        expected = "quote"
+        self.assertEqual(markdown.block_to_blocktype(text), expected)
+
+    def test_blocktype_uList(self):
+        text = "* List L1\n- List L2"
+        expected = "unordered_list"
+        self.assertEqual(markdown.block_to_blocktype(text), expected)
+
+    def test_blocktype_oList(self):
+        text = "1. List L1\n2. List L2"
+        expected = "ordered_list"
+        self.assertEqual(markdown.block_to_blocktype(text), expected)
+
+    def test_blocktype_none(self):
+        text = "Just a normal\nParagraph"
+        expected = "paragraph"
+        self.assertEqual(markdown.block_to_blocktype(text), expected)
 
 
 if __name__ == "__main__":

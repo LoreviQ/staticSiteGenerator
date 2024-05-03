@@ -83,3 +83,21 @@ def markdown_to_blocks(text):
         block = block.strip()
         output += [block]
     return output
+
+
+def block_to_blocktype(block):
+    if re.match(r"^(#{1,6} )", block):
+        return "heading"
+    if block[:3] == "```" and block[-3:] == "```":
+        return "code"
+    lines = block.split("\n")
+    if all(line[0] == ">" for line in lines):
+        return "quote"
+    if all(re.match(r"^([*-] )", line) for line in lines):
+        return "unordered_list"
+    n = 1
+    for line in lines:
+        if line[:3] != f"{n}. ":
+            return "paragraph"
+        n += 1
+    return "ordered_list"

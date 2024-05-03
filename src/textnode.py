@@ -96,3 +96,13 @@ def textNode_extract_markdown_links(text_nodes):
         if text:
             output += [TextNode(text, "text")]
     return output
+
+
+def text_to_textnode(text):
+    node = TextNode(text, "text")
+    node = textNode_extract_markdown_images(node)
+    node = textNode_extract_markdown_links(node)
+    node = split_textNode_delimiter(node, "bold")
+    node = split_textNode_delimiter(node, "italic")
+    node = split_textNode_delimiter(node, "code")
+    return node

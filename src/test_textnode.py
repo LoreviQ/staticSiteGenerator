@@ -147,7 +147,7 @@ class TestTextNode(unittest.TestCase):
             textnode.TextNode(" and a ", "text"),
             textnode.TextNode("link", "link", "https://boot.dev"),
         ]
-        self.assertEqual(textnode.text_to_textnode(text), expected)
+        self.assertEqual(textnode.text_to_textnode_markdown(text), expected)
 
 
 if __name__ == "__main__":

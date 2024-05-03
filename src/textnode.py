@@ -98,7 +98,7 @@ def textNode_extract_markdown_links(text_nodes):
     return output
 
 
-def text_to_textnode(text):
+def text_to_textnode_markdown(text):
     node = [TextNode(text, "text")]
     node = textNode_extract_markdown_images(node)
     node = textNode_extract_markdown_links(node)

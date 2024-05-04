@@ -1,5 +1,6 @@
 import re
 
+from htmlnode import HTMLNode, LeafNode, ParentNode
 from textnode import TextNode
 
 
@@ -101,3 +102,13 @@ def block_to_blocktype(block):
             return "paragraph"
         n += 1
     return "ordered_list"
+
+
+def block_to_HTMLNode(block):
+    match block_to_blocktype(block):
+        case "paragraph":
+            children = []
+            text_nodes = text_to_textnode_markdown(block)
+            for text_node in text_nodes:
+                children += [text_node.to_html_node()]
+            return ParentNode("p", children)

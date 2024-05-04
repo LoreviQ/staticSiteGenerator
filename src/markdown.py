@@ -105,10 +105,23 @@ def block_to_blocktype(block):
 
 
 def block_to_HTMLNode(block):
+    children = []
     match block_to_blocktype(block):
         case "paragraph":
-            children = []
+            block = block.replace("\n", " ")
             text_nodes = text_to_textnode_markdown(block)
             for text_node in text_nodes:
                 children += [text_node.to_html_node()]
             return ParentNode("p", children)
+        case "heading":
+            heading_tier = 0
+            for char in block:
+                if char == "#":
+                    heading_tier += 1
+                else:
+                    break
+            block = block[heading_tier + 1 :]
+            text_nodes = text_to_textnode_markdown(block)
+            for text_node in text_nodes:
+                children += [text_node.to_html_node()]
+            return ParentNode(f"h{heading_tier}", children)

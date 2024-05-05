@@ -180,7 +180,11 @@ class TestTextNode(unittest.TestCase):
         expected = (
             "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>"
         )
+        self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
+    def test_paragraphs(self):
+        text = """\nThis is **bolded** paragraph\ntext in a p\ntag here\n\nThis is another paragraph with *italic* text and `code` here\n\n"""
+        expected = "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>"
         self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
 

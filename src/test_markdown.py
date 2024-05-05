@@ -175,6 +175,14 @@ class TestTextNode(unittest.TestCase):
         expected = "paragraph"
         self.assertEqual(markdown.block_to_blocktype(text), expected)
 
+    def test_paragraph(self):
+        text = """\nThis is **bolded** paragraph\ntext in a p\ntag here\n\n"""
+        expected = (
+            "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>"
+        )
+
+        self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
+
 
 if __name__ == "__main__":
     unittest.main()

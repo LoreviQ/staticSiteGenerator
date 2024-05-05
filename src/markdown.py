@@ -139,3 +139,13 @@ def block_to_HTMLNode(block):
             for text_node in text_nodes:
                 children += [text_node.to_html_node()]
             return ParentNode("blockquote", children)
+        case "unordered_list":
+            lines = block.split("\n")
+            list_items = []
+            for line in lines:
+                line = line[2:] + " "
+                line_nodes = text_to_textnode_markdown(line)
+                for line_node in line_nodes:
+                    children += [line_node.to_html_node()]
+                list_items += [ParentNode("li", children)]
+            return ParentNode("ul", list_items)

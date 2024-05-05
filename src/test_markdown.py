@@ -187,6 +187,11 @@ class TestTextNode(unittest.TestCase):
         expected = "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>"
         self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
+    def test_lists(self):
+        text = """\n- This is a list\n- with items\n- and *more* items\n\n1. This is an `ordered` list\n2. with items\n3. and more items\n\n"""
+        expected = "<div><ul><li>This is a list</li><li>with items</li><li>and <i>more</i> items</li></ul><ol><li>This is an <code>ordered</code> list</li><li>with items</li><li>and more items</li></ol></div>"
+        self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
+
 
 if __name__ == "__main__":
     unittest.main()

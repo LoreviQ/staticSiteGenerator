@@ -1,6 +1,6 @@
 import re
 
-from htmlnode import HTMLNode, LeafNode, ParentNode
+from htmlnode import ParentNode
 from textnode import TextNode
 
 

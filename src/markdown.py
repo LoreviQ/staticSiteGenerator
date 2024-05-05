@@ -130,3 +130,12 @@ def block_to_HTMLNode(block):
             for text_node in text_nodes:
                 children += [text_node.to_html_node()]
             return ParentNode("pre", [ParentNode("code", children)])
+        case "quote":
+            lines = block.split("\n")
+            block = ""
+            for line in lines:
+                block += line[1:] + " "
+            text_nodes = text_to_textnode_markdown(block)
+            for text_node in text_nodes:
+                children += [text_node.to_html_node()]
+            return ParentNode("blockquote", children)

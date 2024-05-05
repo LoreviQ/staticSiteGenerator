@@ -159,3 +159,11 @@ def block_to_HTMLNode(block):
                     children += [line_node.to_html_node()]
                 list_items += [ParentNode("li", children)]
             return ParentNode("ol", list_items)
+
+
+def markdown_to_html_node(markdown):
+    children = []
+    blocks = markdown_to_blocks(markdown)
+    for block in blocks:
+        children += [block_to_HTMLNode(block)]
+    return ParentNode("div", children)

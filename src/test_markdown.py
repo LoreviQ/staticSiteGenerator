@@ -200,8 +200,6 @@ class TestTextNode(unittest.TestCase):
     def test_blockquote(self):
         text = "\n>This is a\n> blockquote block\n\nthis is paragraph text\n\n"
         expected = "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>"
-        print(markdown.markdown_to_html_node(text).to_html())
-
         self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
 

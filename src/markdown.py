@@ -143,6 +143,7 @@ def block_to_HTMLNode(block):
             lines = block.split("\n")
             list_items = []
             for line in lines:
+                children = []
                 line = line[2:]
                 line_nodes = text_to_textnode_markdown(line)
                 for line_node in line_nodes:
@@ -153,6 +154,7 @@ def block_to_HTMLNode(block):
             lines = block.split("\n")
             list_items = []
             for line in lines:
+                children = []
                 line = line[3:]
                 line_nodes = text_to_textnode_markdown(line)
                 for line_node in line_nodes:

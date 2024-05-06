@@ -126,7 +126,8 @@ def block_to_HTMLNode(block):
                 children += [text_node.to_html_node()]
             return ParentNode(f"h{heading_tier}", children)
         case "code":
-            text_nodes = text_to_textnode_markdown(block[4:-3])
+            block = block.replace("\n", "")
+            text_nodes = text_to_textnode_markdown(block[3:-3])
             for text_node in text_nodes:
                 children += [text_node.to_html_node()]
             return ParentNode("pre", [ParentNode("code", children)])

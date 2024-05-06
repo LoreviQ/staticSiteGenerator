@@ -198,8 +198,13 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
     def test_blockquote(self):
-        text = "\n>This is a\n> blockquote block\n\nthis is paragraph text\n\n"
+        text = "\n>This is a\n> blockquote block\n\nthis is paragraph text\n"
         expected = "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>"
+        self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
+
+    def test_codeblock(self):
+        text = "\n```\nThis is a code block\n```\n\nThis is paragraph text\n"
+        expected = "<div><pre><code>This is a code block</code></pre><p>This is paragraph text</p></div>"
         self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
 

@@ -197,6 +197,13 @@ class TestTextNode(unittest.TestCase):
         expected = "<div><h1>this is an h1</h1><p>this is paragraph text</p><h2>this is an h2</h2></div>"
         self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
+    def test_blockquote(self):
+        text = "\n>This is a\n> blockquote block\n\nthis is paragraph text\n\n"
+        expected = "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>"
+        print(markdown.markdown_to_html_node(text).to_html())
+
+        self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
+
 
 if __name__ == "__main__":
     unittest.main()

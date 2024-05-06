@@ -134,7 +134,7 @@ def block_to_HTMLNode(block):
             lines = block.split("\n")
             block = ""
             for line in lines:
-                block += line[1:] + " "
+                block += line[1:]
             text_nodes = text_to_textnode_markdown(block)
             for text_node in text_nodes:
                 children += [text_node.to_html_node()]

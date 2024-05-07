@@ -1,8 +1,5 @@
 import os
 import shutil
-import time
-
-from textnode import TextNode
 
 
 def copy_directory(src, dst):

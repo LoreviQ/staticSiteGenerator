@@ -12,6 +12,11 @@ def recursiveDelete(path):
         raise ValueError("Invalid Path")
     if os.path.isfile(path):
         os.remove(path)
+    if os.path.isdir(path):
+        dir_entries = os.listdir(path)
+        for entry in dir_entries:
+            recursiveDelete(os.path.join(path, entry))
+        os.rmdir(path)
 
 
 if __name__ == "__main__":

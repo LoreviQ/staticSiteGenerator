@@ -1,11 +1,12 @@
 import os
 import shutil
+import time
 
 from textnode import TextNode
 
 
 def copy_directory(src, dst):
-    if not os.path.exists(dst):
+    if os.path.exists(dst):
         recursive_delete(dst)
     recursive_copy(src, dst, "")
 
@@ -34,7 +35,6 @@ def recursive_delete(path):
         for entry in dir_entries:
             recursive_delete(os.path.join(path, entry))
         os.rmdir(path)
-    raise ValueError("Invalid Path")
 
 
 if __name__ == "__main__":

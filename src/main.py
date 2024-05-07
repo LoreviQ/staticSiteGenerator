@@ -26,7 +26,7 @@ def recursive_copy(src, dst, sub_path):
 
 def recursive_delete(path):
     if not os.path.exists(path):
-        raise ValueError("Invalid Path")
+        return
     if os.path.isfile(path):
         os.remove(path)
     if os.path.isdir(path):

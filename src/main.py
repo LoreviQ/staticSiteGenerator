@@ -3,12 +3,12 @@ import os
 from textnode import TextNode
 
 
-def recursiveCopy(copy, destination):
+def recursive_copy(copy, destination):
     if not os.path.exists(destination):
-        recursiveDelete(destination)
+        recursive_delete(destination)
 
 
-def recursiveDelete(path):
+def recursive_delete(path):
     if not os.path.exists(path):
         raise ValueError("Invalid Path")
     if os.path.isfile(path):
@@ -16,10 +16,10 @@ def recursiveDelete(path):
     if os.path.isdir(path):
         dir_entries = os.listdir(path)
         for entry in dir_entries:
-            recursiveDelete(os.path.join(path, entry))
+            recursive_delete(os.path.join(path, entry))
         os.rmdir(path)
     raise ValueError("Invalid Path")
 
 
 if __name__ == "__main__":
-    recursiveCopy("./static", "./public")
+    recursive_copy("./static", "./public")

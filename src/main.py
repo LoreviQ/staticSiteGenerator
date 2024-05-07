@@ -1,5 +1,15 @@
+import os
+
 from textnode import TextNode
 
+
+def recursiveCopy():
+    print(os.getcwd())
+
+
+def recursiveDelete(path):
+    print(os.path.exists(path))
+
+
 if __name__ == "__main__":
-    tn = TextNode("This is a text node", "bold", "https://www.boot.dev")
-    print(tn.__repr__())
+    recursiveDelete("./public")

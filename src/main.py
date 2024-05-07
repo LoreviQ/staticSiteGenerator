@@ -1,11 +1,27 @@
 import os
+import shutil
 
 from textnode import TextNode
 
 
-def recursive_copy(copy, destination):
-    if not os.path.exists(destination):
-        recursive_delete(destination)
+def copy_directory(src, dst):
+    if not os.path.exists(dst):
+        recursive_delete(dst)
+    recursive_copy(src, dst, "")
+
+
+def recursive_copy(src, dst, sub_path):
+    s_path = os.path.join(src, sub_path)
+    d_path = os.path.join(dst, sub_path)
+    if not os.path.exists(s_path):
+        raise ValueError("Invalid Path")
+    if os.path.isdir(s_path):
+        os.mkdir(d_path)
+        dir_entries = os.listdir(s_path)
+        for entry in dir_entries:
+            recursive_copy(src, dst, os.path.join(sub_path, entry))
+    if os.path.isfile(s_path):
+        shutil.copy(s_path, d_path)
 
 
 def recursive_delete(path):
@@ -22,4 +38,4 @@ def recursive_delete(path):
 
 
 if __name__ == "__main__":
-    recursive_copy("./static", "./public")
+    copy_directory("./static", "./public")

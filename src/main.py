@@ -3,8 +3,9 @@ import os
 from textnode import TextNode
 
 
-def recursiveCopy():
-    print(os.getcwd())
+def recursiveCopy(copy, destination):
+    if not os.path.exists(destination):
+        recursiveDelete(destination)
 
 
 def recursiveDelete(path):
@@ -20,4 +21,4 @@ def recursiveDelete(path):
 
 
 if __name__ == "__main__":
-    recursiveDelete("./public")
+    recursiveCopy("./static", "./public")

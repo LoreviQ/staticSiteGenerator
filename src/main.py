@@ -34,5 +34,9 @@ def recursive_delete(path):
         os.rmdir(path)
 
 
+def generate_page(src, dst, template):
+    pass
+
+
 if __name__ == "__main__":
     copy_directory("./static", "./public")

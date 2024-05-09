@@ -46,9 +46,12 @@ def generate_page(src, dst, template):
     title = markdown.extract_title(md_text)
     html_text = html_text.replace("{{ Title }}", f'"{title}"')
     html_text = html_text.replace("{{ Content }}", f'"{content}"')
+    if os.path.exists(dst):
+        os.remove(dst)
     with open(dst, "w", encoding="UTF-8") as out:
         out.write(html_text)
 
 
 if __name__ == "__main__":
+    generate_page("./static/index.md", "./static/index.html", "./template.html")
     copy_directory("./static", "./public")

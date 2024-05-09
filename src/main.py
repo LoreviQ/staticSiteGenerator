@@ -1,6 +1,8 @@
 import os
 import shutil
 
+import markdown
+
 
 def copy_directory(src, dst):
     if os.path.exists(dst):
@@ -35,7 +37,17 @@ def recursive_delete(path):
 
 
 def generate_page(src, dst, template):
-    pass
+    print(f"Generating page from {src} to {dst} using {template}")
+    with open(f"{src}", "r", encoding="UTF-8") as md_file:
+        md_text = md_file.read()
+    with open(f"{template}", "r", encoding="UTF-8") as html_file:
+        html_text = html_file.read()
+    content = markdown.markdown_to_html_node(md_text).to_html()
+    title = markdown.extract_title(md_text)
+    html_text = html_text.replace("{{ Title }}", f'"{title}"')
+    html_text = html_text.replace("{{ Content }}", f'"{content}"')
+    with open(dst, "w", encoding="UTF-8") as out:
+        out.write(html_text)
 
 
 if __name__ == "__main__":

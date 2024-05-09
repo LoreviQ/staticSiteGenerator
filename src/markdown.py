@@ -170,3 +170,11 @@ def markdown_to_html_node(markdown):
     for block in blocks:
         children += [block_to_HTMLNode(block)]
     return ParentNode("div", children)
+
+
+def extract_title(markdown):
+    lines = markdown.split("\n")
+    for line in lines:
+        if re.match(r"^(# )", line):
+            return line[2:]
+    raise ValueError("No heading in markdown file")

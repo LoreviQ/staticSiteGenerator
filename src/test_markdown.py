@@ -207,6 +207,12 @@ class TestTextNode(unittest.TestCase):
         expected = "<div><pre><code>This is a code block</code></pre><p>This is paragraph text</p></div>"
         self.assertEqual(markdown.markdown_to_html_node(text).to_html(), expected)
 
+    def test_extract_title(self):
+        with open("./static/index.md", "r", encoding="UTF-8") as md_file:
+            text = md_file.read()
+        expected = 'The Unparalleled Majesty of "The Lord of the Rings"'
+        self.assertEqual(markdown.extract_title(text), expected)
+
 
 if __name__ == "__main__":
     unittest.main()

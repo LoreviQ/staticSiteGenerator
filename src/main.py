@@ -52,7 +52,7 @@ def generate_page(src, dst, template):
         out.write(html_text)
 
 
-def recursive_generate_page(src, dst, sub_path, template):
+def recursive_generate_page(src, dst, template, sub_path=""):
     s_path = os.path.join(src, sub_path)
     d_path = os.path.join(dst, sub_path)
     if not os.path.exists(s_path):
@@ -67,5 +67,5 @@ def recursive_generate_page(src, dst, sub_path, template):
 
 
 if __name__ == "__main__":
-    generate_page("./static/index.md", "./static/index.html", "./template.html")
+    recursive_generate_page("./markdown/", "./static/", "./template.html")
     copy_directory("./static", "./public")

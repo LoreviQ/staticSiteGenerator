@@ -58,12 +58,18 @@ def recursive_generate_page(src, dst, template, sub_path=""):
     if not os.path.exists(s_path):
         raise ValueError("Invalid Path")
     if os.path.isdir(s_path):
-        os.mkdir(d_path)
+        if not os.path.exists(d_path):
+            os.mkdir(d_path)
         dir_entries = os.listdir(s_path)
         for entry in dir_entries:
-            recursive_generate_page(src, dst, os.path.join(sub_path, entry), template)
+            recursive_generate_page(
+                src,
+                dst,
+                template,
+                os.path.join(sub_path, entry),
+            )
     if os.path.isfile(s_path):
-        generate_page(s_path, d_path, template)
+        generate_page(s_path, d_path[:-2] + "html", template)
 
 
 if __name__ == "__main__":
